@@ -101,13 +101,6 @@ class AssignRoomWizard(models.TransientModel):
         return self._reload_action()
 
     def _reload_action(self):
-        # return {
-        #     'type': 'ir.actions.client',
-        #     'tag': 'reload_context',
-        #     'params': {
-        #         'default_reservation_id': self.reservation_id.id,
-        #     }
-        # }
         return True
 
     def display_button_text(self):
