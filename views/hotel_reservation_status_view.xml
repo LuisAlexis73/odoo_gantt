@@ -1,0 +1,28 @@
+<odoo>
+
+  <record id="hotel_reservation_status_form" model="ir.ui.view">
+    <field name="name">hotel.reservation.status.form</field>
+    <field name="model">hotel.reservation.status</field>
+    <field name="inherit_id" ref="hotel_extension.reservation_status_form_view" />
+    <field name="arch" type="xml">
+        <xpath expr="//form" position="replace">
+            <form string="Hotel Reservation Status">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="description"/>
+                            <field name="reservation_state"/>
+                        </group>
+                        <group>
+                            <field name="user_is_manager" invisible="1"/>
+                            <field name="colour_odoo"/>
+                            <field name="set_label_colour" readonly="user_is_manager == False"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </xpath>
+    </field>
+  </record>
+</odoo>

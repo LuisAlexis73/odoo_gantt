@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="hotel_gantt_view" model="ir.ui.view">
+    <field name="name">hotel.view.gantt</field>
+    <field name="model">hotel.folio.line</field>
+    <field name="arch" type="xml">
+        <gantt 
+            date_start="checkin_datetime"
+            date_stop="checkout_datetime"
+            default_group_by="room_id"
+            color="reservation_status_id"
+            string="Hotel Moogah Planning"
+            edit="false"
+            create="false"
+            scales="month"
+            dynamic_range="true"
+        >
+            <field name="colour_odoo" />
+            <field name="daily_availability" />
+            <field name="room_number_name" />
+            <field name="folio_id" />
+            <field name="guest_name" />
+            <field name="folio_number" />
+            <field name="reference_name" />
+            <field name="internal_res_no" />
+
+            <templates>
+                <div t-name="gantt-popover">
+                    <div class="o_gantt_popover">
+                        <ul class="ps-1 mb-0 list-unstyled">
+                            <li>
+                                <strong>Internal Res. No: </strong>
+                                <t t-out="internal_res_no"/>
+                            </li>
+                            <li class="o_gantt_popover_content_item mt-2">
+                                <strong>Folio Number: </strong>
+                                <a
+                                    t-attf-href="/web#id={{ folio_id[0] 
+                                    }}&amp;action=hotel.open_hotel_folio1_form_tree_all&amp;model=hotel.folio&amp;view_type=form"
+                                    style="text-decoration: underline; outline: none">
+                                    <t t-out="folio_number"/>
+                                </a>
+                            </li>
+                            <li class="o_gantt_popover_content_item mt-2">
+                                <strong>Reference: </strong>
+                                <t t-out="reference_name"/>
+                            </li>
+                            <li class="o_gantt_popover_content_item mt-2">
+                                <strong>Guest Name: </strong>
+                                <t t-out="guest_name"/>
+                            </li>
+                            <li class="o_gantt_popover_content_item mt-2">
+                                <strong>Room Number: </strong>
+                                <t t-out="room_number_name"/>
+                            </li>
+                            <li class="o_gantt_popover_content_item mt-2">
+                                <strong>Check In: </strong>
+                                <t t-esc="checkin_datetime.setZone('UTC').toFormat('dd-MM-yyyy')"/>
+                            </li>
+                            <li class="o_gantt_popover_content_item mt-2">
+                                <strong>Check Out: </strong>
+                                <t t-esc="checkout_datetime.setZone('UTC').toFormat('dd-MM-yyyy')"/>
+                            </li>
+<!--                            <li class="o_gantt_popover_content_item mt-2">-->
+<!--                                <strong>Availability: </strong>-->
+<!--                                <ul class="mt-1 ps-3 list-unstyled">-->
+<!--                                    <t t-foreach="daily_availability.split(', ')" t-as="day">-->
+<!--                                        <li>-->
+<!--                                            <t t-out="day"/>-->
+<!--                                        </li>-->
+<!--                                    </t>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </templates>
+        </gantt>
+    </field>
+  </record>
+
+  <record id="action_hotel_folio_line_gantt" model="ir.actions.act_window">
+    <field name="name">Hotel Planning</field>
+    <field name="res_model">hotel.folio.line</field>
+    <field name="view_mode">gantt</field>
+    <field name="view_id" ref="hotel_gantt_view" />
+    <field name="domain">[('state', '!=', 'cancel')]</field>
+    <field name="context">{
+            'group_by': ['room_id', 'room_number_id'],
+        }
+    </field>
+  </record>
+
+  <menuitem name="Gantt Chart" id="menu_hotel_folio_line_gantt" action="action_hotel_folio_line_gantt"
+            parent="hotel.hotel_management_menu" />
+
+</odoo>

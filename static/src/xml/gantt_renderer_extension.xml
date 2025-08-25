@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="hotel_gantt_extension.GanttRendererExtension.Header" t-inherit="web_gantt.GanttRenderer.Header" t-inherit-mode="extension">
+      <xpath expr="//b[@t-esc='getFormattedFocusDate()']" position="before">
+        <div class="mx-4 ps-4">
+          <GanttMonthYearSelector model="model" />
+        </div>
+      </xpath>
+      
+      <xpath expr="//b[@t-esc='getFormattedFocusDate()']" position="replace">
+        <b t-esc="getFormattedFocusDate()" class="o_gantt_formatted_focus_date" />
+      </xpath>
+    </t>
+    
+    <t t-name="hotel_gantt_extension.GanttRendererExtension.Pill" t-inherit="web_gantt.GanttRenderer.Pill" t-inherit-mode="extension">
+      <xpath expr="//span[@class='o_gantt_pill_title text-truncate mx-1']" position="replace">
+        <span class="d-inline-block text-truncate px-1 text-light" t-esc="pill.displayName" />
+      </xpath>
+    </t>
+
+    <t t-name="hotel_gantt_extension.GanttRendererExtension.Header" t-inherit="web_gantt.GanttRenderer.Header" t-inherit-mode="extension">
+      <xpath expr="//div[@class='o_gantt_header_slots o_gantt_grid_columns bg-view fw-bold']" position="replace">
+        <div class="o_gantt_header_slots o_gantt_grid_columns bg-view fw-bold" t-attf-style="{{ model.metaData.groupedBy.length ? 'grid-column: 2 / -1;' : 'grid-column: 1 / -1;' }}">
+            <t t-set="formats" t-value="{'week': 'cccc, d', 'month': 'dd', 'year': env.isSmall ? 'MMM' : 'MMMM'}"/>
+
+            <t t-set="currentMonth" t-value="0" />
+            <t t-set="monthParity" t-value="0" />
+
+            <t t-foreach="columns" t-as="column" t-key="column.id">
+                <t t-set="isNewMonth" t-value="currentMonth !== column.start.month" />
+                <t t-if="isNewMonth">
+                  <t t-set="currentMonth" t-value="column.start.month" />
+                  <t t-set="monthParity" t-value="monthParity === 0 ? 1 : 0" />
+                </t>
+
+                <div class="o_gantt_header_cell d-flex align-items-center justify-content-center py-2"
+                    t-att-class="{o_gantt_today: column.isToday, 'bg-100': !column.isToday, 'o_gantt_month_even': monthParity === 0, 'o_gantt_month_odd': monthParity === 1}"
+                    t-att-style="getGridPosition({column: column.grid.column})"
+                >
+                    <t t-if="model.metaData.scale.id in formats" t-esc="column.start.toFormat(formats[model.metaData.scale.id])"/>
+                    <small t-else="" class="text-center">
+                        <t t-if="is24HourFormat">
+                            <b t-esc="column.start.toFormat('H')"/>
+                        </t>
+                        <t t-else="">
+                            <b t-esc="column.start.toFormat('h')"/>
+                            <div class="d-xl-inline-block" t-esc="column.start.toFormat('a').toLowerCase()"/>
+                        </t>
+                    </small>
+                </div>
+            </t>
+        </div>
+      </xpath>
+    </t>
+</templates>

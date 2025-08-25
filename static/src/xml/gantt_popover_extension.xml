@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="hotel_gantt_extension.GanttPopoverExtension" t-inherit="web_gantt.GanttPopover" t-inherit-mode="extension" class="fs-6">
+    <xpath expr="//button[@class='btn btn-primary btn-sm']" position="replace">
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary" style="font-size: 12px;" t-on-click="onAssignRoom">
+          <t t-esc="getButtonText()"/>
+        </button>
+        <button class="btn btn-primary" style="font-size: 12px;" t-on-click="onOpenFolioForm">
+          Open Folio
+        </button>
+      </div>
+    </xpath>
+  </t>
+</templates>

@@ -1,0 +1,30 @@
+{
+    "name": "Custom Hotel Gantt View",
+    "version": "17.0.1.0.7",
+    "category": "Services/Hotel",
+    "summary": "This module helps to manage hotel room booking",
+    "depends": ["hotel", "web_gantt", "hotel_extension"],
+    "assets": {
+        "web.assets_backend": [
+            "hotel_gantt_extension/static/src/js/gantt_model_extension.js",
+            "hotel_gantt_extension/static/src/js/gantt_popover_extension.js",
+            "hotel_gantt_extension/static/src/js/gantt_month_year_selector.js",
+            "hotel_gantt_extension/static/src/js/gantt_renderer_extension.js",
+            "hotel_gantt_extension/static/src/js/gantt_create_new_line.js",
+            "hotel_gantt_extension/static/src/xml/gantt_popover_extension.xml",
+            "hotel_gantt_extension/static/src/xml/gantt_month_year_selector.xml",
+            "hotel_gantt_extension/static/src/xml/gantt_renderer_extension.xml",
+            "hotel_gantt_extension/static/src/xml/gantt_create_new_line.xml",
+            "hotel_gantt_extension/static/src/scss/gantt_view_extension.scss",
+        ],
+    },
+    "data": [
+        "data/initial_data.xml",
+        "views/hotel_folio_line_view.xml",
+        "views/hotel_reservation_status_view.xml",
+        "security/ir.model.access.csv",
+        "wizard/assign_room_wizard.xml",
+    ],
+    "installable": True,
+    "application": False,
+}

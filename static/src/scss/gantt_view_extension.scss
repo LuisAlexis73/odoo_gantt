@@ -1,0 +1,53 @@
+.o_gantt_view .o_gantt_renderer {
+  font-size: 12px;
+}
+
+.o_gantt_popover {
+  font-size: 12px;
+}
+
+.o_gantt_pill_title {
+  font-size: 11px;
+}
+
+.o_gantt_formatted_focus_date {
+  font-size: 18px;
+  margin-inline: auto;
+}
+
+.o_gantt_month_even {
+  background-color: rgba(231, 231, 231, 0.651) !important;
+}
+
+.o_gantt_month_odd {
+  background-color: rgba(231, 231, 231, 0.3) !important;
+}
+
+.o_gantt_today {
+  background-color: #fffaeb !important;
+  border-left-color: #dca665 !important;
+  border-top-color: #dca665 !important;
+}
+
+.o_gantt_cells .o_gantt_pill {
+  background-color: mix(nth($o-colors-complete, 1), white, 90%) !important;
+  color: color-contrast(mix(nth($o-colors-complete, 1), white, 90%)) !important;
+
+  @include o-gantt-hover() {
+      background-color: nth($o-colors-complete, 1) !important;
+      color: color-contrast(nth($o-colors-complete, 1)) !important;
+  }
+
+  @for $index from 1 through length($o-colors-complete) {
+      &.o_gantt_color_#{$index - 1} {
+          $color: nth($o-colors-complete, $index);
+          background-color: mix($color, white, 90%) !important;
+          color: color-contrast(mix($color, white, 90%)) !important;
+
+          @include o-gantt-hover() {
+              background-color: $color !important;
+              color: color-contrast($color) !important;
+          }
+      }
+  }
+}

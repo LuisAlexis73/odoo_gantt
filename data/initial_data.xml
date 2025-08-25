@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Parámetro para meses adelante -->
+        <record id="param_meses_adelante" model="ir.config_parameter">
+            <field name="key">meses_adelante</field>
+            <field name="value">6</field>
+        </record>
+
+        <!-- Parámetro para meses atrás -->
+        <record id="param_meses_atras" model="ir.config_parameter">
+            <field name="key">meses_atras</field>
+            <field name="value">6</field>
+        </record>
+
+        <!-- Parámetro para días a mover -->
+        <record id="param_dias_a_mover" model="ir.config_parameter">
+            <field name="key">dias_a_mover</field>
+            <field name="value">5</field>
+        </record>
+    </data>
+</odoo>

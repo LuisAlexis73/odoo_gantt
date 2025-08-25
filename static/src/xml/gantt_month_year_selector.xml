@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="hotel_gantt_extension.GanttMonthYearSelector" owl="1">
+        <div class="o_gantt_date_inputs d-flex gap-2 align-items-center">
+            <div class="input-group">
+                <select
+                    class="form-select"
+                    t-on-change="onMonthChange"
+                >
+                    <option value="">Seleccionar mes</option>
+                    <t t-foreach="months" t-as="month" t-key="month.value">
+                        <option t-att-value="month.value" t-att-selected="month.value === state.month">
+                            <t t-esc="month.label"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <select
+                    class="form-select"
+                    t-on-change="onYearChange"
+                >
+                    <option value="">Seleccionar año</option>
+                    <t t-foreach="getYears()" t-as="year" t-key="year">
+                        <option t-att-value="year" t-att-selected="year === state.year">
+                            <t t-esc="year"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+
+            <button
+                class="btn btn-secondary ms-2 w-25"
+                t-on-click="refreshView"
+                t-att-disabled="ui.loading"
+            >
+                <i class="fa fa-refresh"/>
+            </button>
+        </div>
+    </t>
+</templates>
