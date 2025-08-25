@@ -61,16 +61,6 @@
                                 <strong>Check Out: </strong>
                                 <t t-esc="checkout_datetime.setZone('UTC').toFormat('dd-MM-yyyy')"/>
                             </li>
-<!--                            <li class="o_gantt_popover_content_item mt-2">-->
-<!--                                <strong>Availability: </strong>-->
-<!--                                <ul class="mt-1 ps-3 list-unstyled">-->
-<!--                                    <t t-foreach="daily_availability.split(', ')" t-as="day">-->
-<!--                                        <li>-->
-<!--                                            <t t-out="day"/>-->
-<!--                                        </li>-->
-<!--                                    </t>-->
-<!--                                </ul>-->
-<!--                            </li>-->
                         </ul>
                     </div>
                 </div>
